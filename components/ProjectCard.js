@@ -10,7 +10,13 @@ export default function ProjectCard(props) {
 
 	const [render, setRender] = useState(false);
 
-	let data = GetData("projects");
+
+	const data = GetData("projects");
+
+
+
+		
+
 	let displayRecord = {
 		fields: {
 			Logo: [""],
@@ -18,6 +24,7 @@ export default function ProjectCard(props) {
 
 		}
 	};
+
 
 	const findRecord = (arr) => {
 		arr.map((record) => {
@@ -29,6 +36,18 @@ export default function ProjectCard(props) {
 	};
 
 	findRecord(data);
+	let keyNum = 0;
+
+	const { 
+		Name, 
+		Website, 
+		Twitter, 
+		GitHub, 
+		Tickr, 
+		LaunchDate, 
+		LaunchType, 
+		Description, 
+		People } = displayRecord.fields;
 
 	const loaderBlock = () => (
 		<div>
@@ -42,26 +61,27 @@ export default function ProjectCard(props) {
 	)
 
 	const projectBlock = () => (
+		
 		<Item.Group>
 			<Item>
 				<Item.Image src={displayRecord.fields.Logo[0].url} />
 				<Item.Content>
-					<h1>{displayRecord.fields.Name}</h1>
-					<h4>Ticker Symbol: {displayRecord.fields.Tickr}</h4>
+					<h1>{Name}</h1>
+					<h4>Ticker Symbol: {Tickr || "N/A"}</h4>
 					<Item.Meta>
-						<a href={displayRecord.fields.Website}><Icon name="globe" size="big"></Icon></a>
-						<a href={displayRecord.fields.Twitter}><Icon name="twitter square" size="big"></Icon></a>
-						<a href={displayRecord.fields.GitHub}><Icon name="github square" size="big"></Icon></a>
+						<a href={Website}><Icon name="globe" size="big"></Icon></a>
+						<a href={Twitter}><Icon name="twitter square" size="big"></Icon></a>
+						<a href={GitHub}><Icon name="github square" size="big"></Icon></a>
 					</Item.Meta>
-					<h5>Launch Date: {displayRecord.fields.LaunchDate || "N/A"} | 
-					Launch Type: {displayRecord.fields.LaunchType || "N/A"}</h5>
+					<h5>Launch Date: {LaunchDate || "N/A"} | 
+					Launch Type: {LaunchType || "N/A"}</h5>
 					<Item.Description>
-						{displayRecord.fields.Description}
+						{Description}
 					</Item.Description>
 					<Item.Extra>
-						<h5>People: {displayRecord.fields.People || "N/A"}</h5>
+						<h5>People: {People || "N/A"}</h5>
 						{displayRecord.fields.Tags.map(tag => (
-		                        <Label>{tag}</Label>
+		                        <Label class="label" key={keyNum += 1}>{tag}</Label>
 		                        ))}
 					</Item.Extra>
 				</Item.Content>

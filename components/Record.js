@@ -26,11 +26,12 @@ const Record = ({page}) => {
 		</div>
 	)
 
+	let keyNum = 0;
 
 	const recordBlock = () => (
 	    <Item.Group divided>
 	    	{pageArr.map(record => (
-	    	<Link route={`/projects/${record.id}`} >
+	    	<Link route={`/projects/show/${record.id}`} key={keyNum += 1} >
 	        <Item as='a'>
 	            <Item.Image size='tiny' src={record.fields.Logo[0].url} />
 	            <Item.Content>
@@ -41,7 +42,7 @@ const Record = ({page}) => {
 	                <Item.Description>{record.fields.Description}</Item.Description>
 	                <Item.Extra>
 	                    {record.fields.Tags.map(tag => (
-	                        <Label>{tag}</Label>
+	                        <Label key={keyNum += 1}>{tag}</Label>
 	                        ))}
 	                </Item.Extra>
 	            </Item.Content>

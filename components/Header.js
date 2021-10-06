@@ -1,34 +1,34 @@
 import React from 'react';
-import { Menu, Input } from 'semantic-ui-react';
+import { Menu, Search } from 'semantic-ui-react';
 import { Link } from '../routes';
+import GetData from '../scripts/GetData';
+import GetSearch from '../scripts/GetSearch';
+import CustomSearch from './CustomSearch';
+import styles from '../style/Header.module.css';
 
 const Header = () => {
+
+	const data = GetData("projects");
+
 	return (
-			<Menu fluid>
+			<Menu fluid borderless inverted id={styles.menu} >
 				
 				<Link route="/">
-					<a className="item">
-						<h1>Cardano Natives</h1>
+					<a className="item" id={styles.subTitle}>
+						<h1 className={styles.title}>CARDANO NATIVES</h1>
 					</a>
 				</Link>
 				<Menu.Menu position="right">
-					<Link route="/projects">
-						<a className="item">Projects</a>
-					</Link>
-					<Link route="/tokens">
-						<a className="item">Tokens</a>
-					</Link>
-					<Link route="/nfts">
-						<a className="item">NFTs</a>
-					</Link>
+					<a className="item" id={styles.subTitle} href="/projects/1">Projects</a>
+					<a className="item" id={styles.subTitle} href="/tokens">Tokens</a>
+					<a className="item" id={styles.subTitle} href="/nfts">NFTs</a>
 				</Menu.Menu>
 				<Menu.Menu position="right">
 					<Menu.Item>
-						<Input icon="search" placeholder="Search..." />
+						<CustomSearch class="search" data={data}/>
 					</Menu.Item>
 				</Menu.Menu>
 			</Menu>
-
 		);
 
 };
